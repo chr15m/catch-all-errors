@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <script src="index.js" data-post-url="/test/hello" data-email-to="support@myserver.net" data-continous></script>
+  </head>
+  <body>
+    <script>
+      window.onload = function() {
+        var el = document.getElementById("testInput");
+
+        var barf = function() {
+          throw new Error('borked');
+        };
+
+        if (el.addEventListener) {
+          el.addEventListener('change', barf, true);
+        } else {
+          el.attachEvent('onchange', barf);
+        }
+
+        blee();
+      }
+    </script>
+
+    <p>
+    Type something into the text field and hit [Enter].  You should get an
+    alert showing the arguments passed to window.onerror().
+    </p>
+    <input type="text" id="testInput" name="testInput">
+  </body>
+</html>

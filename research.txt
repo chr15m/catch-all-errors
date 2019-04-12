@@ -1,0 +1,17 @@
+https://stackoverflow.com/questions/5328154/catch-all-javascript-errors-and-send-them-to-server
+https://stackoverflow.com/questions/22366926/a-catch-all-for-javascript-errors
+https://stackoverflow.com/questions/12571650/catching-all-javascript-unhandled-exceptions
+https://stackoverflow.com/questions/205688/javascript-exception-handling
+https://stackoverflow.com/questions/6970475/get-all-javascript-errors-on-page-javascript-error-handling
+https://stackoverflow.com/questions/119432/logging-clientside-javascript-errors-on-server
+
+https://github.com/TrackJs/Tech-Demo/blob/master/src/TrackJs.Demo/Content/js/transmission.js
+https://github.com/jefferyto/glitchjs
+https://github.com/MindscapeHQ/raygun4js
+
+https://catchjs.com/
+https://www.bugsnag.com/
+http://getsentry.com/
+https://www.atatus.com/
+http://jslogger.com/
+http://rescuejs.com/
