@@ -1,16 +1,16 @@
-Tiny JavaScript library to catch all errors & post to your server.
+Tiny library to catch all JavaScript errors and send them to your server.
+
+Enable it with a single line before other JavaScript:
 
 ```html
 <script src="catch-all-errors.min.js" data-post-url="/api/errorhandler"></script>
 ```
 
-This is for you if you want to see the JavaScript errors happening to your users.
+No more mangled, half-understood, context-free error-feelings reported. \o/
 
 This is intended for self-hosting, small businesses, and indie-hacker scale traffic, not venture backed startup scale traffic.
 
-No more mangled, half-understood, context-free error-feelings reported. \o/
-
-### API
+## API
 
 Catch every error and post to a URL on your server.
 
@@ -24,11 +24,13 @@ By default only the first JS error is caught to prevent bad code from spamming o
 <script src="catch-all-errors.min.js" data-post-url="/api/errorhandler" data-continous></script>
 ```
 
-By default the trace is propagated to the browser resulting in `console.error`s but you can disable this behaviour with `data-prevent-default`:
+By default the error is propagated through to default the browser resulting in `console.error`s but you can disable this behaviour with `data-prevent-default`:
 
 ```html
 <script src="catch-all-errors.min.js" data-post-url="/api/errorhandler" data-prevent-default></script>
 ```
+
+### Error object properties
 
 Errors will have the following properties when caught and handled:
 
@@ -36,11 +38,18 @@ Errors will have the following properties when caught and handled:
 {
   "message": "blee is not defined",
   "url": "http://localhost:8000/",
-  "pos": [23, 9],
+  "line": 23,
+  "column": 9,
   "useragent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0",
   "stack": "window.onload@http://localhost:8000/:23:9\n",
 }
 ```
+
+Where `line` and `column` are the position in the file where the error occured, and `stack` is the stack-trace leading up to the error.
+
+### Example server API
+
+[example-api.php](./example-api.php) provides a simple example of printing the JS errors into the error log using PHP.
 
 ### Why use this instead of hosted service X?
 
