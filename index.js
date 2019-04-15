@@ -1,8 +1,3 @@
-// https://news.ycombinator.com/hn.js
-function nu(tag, attrs, text) { var e = document.createElement(tag); for(var a in attrs) { e.setAttribute(a, attrs[a]); }; e.innerHTML = text || ""; return e; }
-function chkurl(s) { return document.location.href.indexOf(s) != -1; }
-function ins(where, el) { return where.parentNode.insertBefore(el, where.nextSibling); };
-
 // respect existing onerror handlers
 var _onerror_original = window.onerror;
 
@@ -16,7 +11,7 @@ action.post_url = script.getAttribute("data-post-url") || null;
 config.continuous = script.getAttribute("data-continuous") != null;
 config.prevent_default = script.getAttribute("data-prevent-default") != null;
 
-console.log("config", config);
+// console.log("config", config);
 
 // install our new error handler
 window.onerror = function(message, url, line, column, error) {
@@ -93,9 +88,15 @@ var _action_post_url = function(url, e) {
 //  * The mailto: link should have &body=JSON.serialize(e)
 // User should be able to customise modal look and contents
 // with CSS and/or configs
-var _action_email_to = function(email_address, e) {
+//
+// https://news.ycombinator.com/hn.js
+// function nu(tag, attrs, text) { var e = document.createElement(tag); for(var a in attrs) { e.setAttribute(a, attrs[a]); }; e.innerHTML = text || ""; return e; }
+// function chkurl(s) { return document.location.href.indexOf(s) != -1; }
+// function ins(where, el) { return where.parentNode.insertBefore(el, where.nextSibling); };
+//
+/*var _action_email_to = function(email_address, e) {
   console.log("_action_email_to", email_address, e);
-}
+}*/
 
 // TODO: handler to post to Google Analytics API
 //  ga('send', 'event', 'window.onerror', message, navigator.userAgent);
