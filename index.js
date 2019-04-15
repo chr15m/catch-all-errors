@@ -13,7 +13,7 @@ var config = {};
 
 action.post_url = script.getAttribute("data-post-url") || null;
 //action.email_to = script.getAttribute("data-email-to") || null;
-config.continuous = script.getAttribute("data-continous") != null;
+config.continuous = script.getAttribute("data-continuous") != null;
 config.prevent_default = script.getAttribute("data-prevent-default") != null;
 
 console.log("config", config);
