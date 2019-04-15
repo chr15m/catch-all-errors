@@ -1,9 +1,9 @@
-Tiny library to catch all JavaScript errors and send them to your server.
+Tiny library to catch all JavaScript errors and send them to your server in `<1k`.
 
 Enable it with a single line before other JavaScript:
 
 ```html
-<script src="catch-all-errors.min.js" data-post-url="/api/errorhandler"></script>
+<script src="https://raw.githubusercontent.com/chr15m/catch-all-errors/master/catch-all-errors.min.js" data-post-url="/api/errorhandler"></script>
 ```
 
 No more mangled, half-understood, context-free error-feelings reported. \o/
