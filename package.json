@@ -1,0 +1,34 @@
+{
+  "name": "catch-all-errors",
+  "version": "0.0.1",
+  "description": "Catch all JavaScript errors and post them to your server",
+  "main": "index.js",
+  "author": "Chris McCormick <chris@mccormick.cx>",
+  "homepage": "https://github.com/chr15m/catch-all-errors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chr15m/catch-all-errors.git",
+    "web": "https://github.com/chr15m/catch-all-errors"
+  },
+  "bugs": {
+    "url": "https://github.com/chr15m/catch-all-errors/issues/"
+  },
+  "devDependencies": {
+    "babel-minify": "^0.5.0",
+    "browserify": "^16.2.3"
+  },
+  "scripts": {
+    "build": "npm run compile && npm run minify",
+    "minify": "cat catch-all-errors.js | minify > catch-all-errors.min.js",
+    "compile": "browserify index.js > catch-all-errors.js",
+    "size": "npm run build && cat catch-all-errors.min.js | gzip | wc -c"
+  },
+  "keywords": [
+    "errors",
+    "reporting",
+    "handling",
+    "error handling",
+    "traceback",
+    "stacktrace"
+  ]
+}
