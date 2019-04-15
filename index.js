@@ -12,7 +12,7 @@ var action = {};
 var config = {};
 
 action.post_url = script.getAttribute("data-post-url") || null;
-action.email_to = script.getAttribute("data-email-to") || null;
+//action.email_to = script.getAttribute("data-email-to") || null;
 config.continuous = script.getAttribute("data-continous") != null;
 config.prevent_default = script.getAttribute("data-prevent-default") != null;
 
@@ -30,7 +30,7 @@ window.onerror = function(message, url, line, column, error) {
 
   // if user has configured API post
   action.post_url && _action_post_url(action.post_url, e);
-  action.email_to && _action_email_to(action.email_to, e);
+  //action.email_to && _action_email_to(action.email_to, e);
 
   // re-install this error handler again if continuous mode
   if (config.continuous) {
@@ -47,7 +47,8 @@ var _extract_error = function(message, url, line, column, error) {
   var e = {
     "message": message,
     "url": url,
-    "pos": [line, column],
+    "line": line,
+    "column": column,
     "useragent": navigator.userAgent,
   };
   if (error) {
@@ -56,19 +57,44 @@ var _extract_error = function(message, url, line, column, error) {
     if (error.message) e.message = error.message;
     if (error.description) e.message = error.description;
   }
-  console.log(e);
-  alert(JSON.stringify(e, null, 2));
   return e;
-}
-
-// handler to prompt the user to send an email
-var _action_email_to = function(email_address, e) {
-  console.log("_action_email_to", email_address, e);
 }
 
 // handler to post to an API url
 var _action_post_url = function(url, e) {
   console.log("_action_post_url", url, e);
+  var http = new XMLHttpRequest();
+  var param_pairs = [];
+  for (var k in e) {
+    param_pairs.push(k + "=" + encodeURIComponent(e[k]));
+  }
+  http.open('POST', url, true);
+  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  
+  http.onreadystatechange = function() {
+      if (http.readyState == 4 && http.status == 200) {
+          console.log("catch-all-errors successful post:", http.responseText);
+      } else if (http.readyState == 4) {
+        console.log("catch-all-errors:", http.status, http.responseText);
+      }
+  }
+  
+  http.send(param_pairs.join("&"));
+}
+
+// TODO: handler to prompt the user to send an email
+// PRs implementing this are welcome!
+//
+// Design:
+//  * Pop up modal asking user to send a mail to the developer.
+//  * The "Send" button should be a href with mailto:
+//  * The mailto: address should be email_address
+//  * The mailto: link should have &subject=Traceback
+//  * The mailto: link should have &body=JSON.serialize(e)
+// User should be able to customise modal look and contents
+// with CSS and/or configs
+var _action_email_to = function(email_address, e) {
+  console.log("_action_email_to", email_address, e);
 }
 
 // TODO: handler to post to Google Analytics API
