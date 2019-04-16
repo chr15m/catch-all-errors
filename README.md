@@ -1,4 +1,4 @@
-Tiny library to catch all JavaScript errors and send them to your server in `<1k`.
+Tiny library to catch all JavaScript errors and send them to your server in `1.4k`.
 
 Enable it with a single line before other JavaScript:
 
