@@ -8,7 +8,7 @@ var config = {};
 
 action.post_url = script.getAttribute("data-post-url") || null;
 action.callback = script.getAttribute("data-callback") || null;
-//action.email_to = script.getAttribute("data-email-to") || null;
+action.email_to = script.getAttribute("data-email-to") || null;
 config.continuous = script.getAttribute("data-continuous") != null;
 config.prevent_default = script.getAttribute("data-prevent-default") != null;
 
@@ -25,9 +25,9 @@ window.onerror = function(message, url, line, column, error) {
   console.log("extracted error:", e);
 
   // if user has configured API post
-  action.post_url && _action_post_url(action.post_url, e);
   action.callback && window[action.callback] && window[action.callback](e);
-  //action.email_to && _action_email_to(action.email_to, e);
+  action.post_url && _action_post_url(action.post_url, e);
+  action.email_to && _action_email_to(action.email_to, e);
 
   // re-install this error handler again if continuous mode
   if (config.continuous) {
@@ -67,7 +67,7 @@ var _action_post_url = function(url, e) {
   }
   http.open('POST', url, true);
   http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  
+
   http.onreadystatechange = function() {
       if (http.readyState == 4 && http.status == 200) {
           console.log("catch-all-errors successful post:", http.responseText);
@@ -75,30 +75,39 @@ var _action_post_url = function(url, e) {
         console.log("catch-all-errors:", http.status, http.responseText);
       }
   }
-  
+
   http.send(param_pairs.join("&"));
 }
 
-// TODO: handler to prompt the user to send an email
-// PRs implementing this are welcome!
-//
-// Design:
-//  * Pop up modal asking user to send a mail to the developer.
-//  * The "Send" button should be a href with mailto:
-//  * The mailto: address should be email_address
-//  * The mailto: link should have &subject=Traceback
-//  * The mailto: link should have &body=JSON.serialize(e)
-// User should be able to customise modal look and contents
-// with CSS and/or configs
+// handler to pop up modal asking user to send a mail to the developer
+// User can customise modal look and contents with CSS
 //
 // https://news.ycombinator.com/hn.js
-// function nu(tag, attrs, text) { var e = document.createElement(tag); for(var a in attrs) { e.setAttribute(a, attrs[a]); }; e.innerHTML = text || ""; return e; }
-// function chkurl(s) { return document.location.href.indexOf(s) != -1; }
-// function ins(where, el) { return where.parentNode.insertBefore(el, where.nextSibling); };
-//
-/*var _action_email_to = function(email_address, e) {
+function nu(tag, attrs, text) { var e = document.createElement(tag); for(var a in attrs) { e.setAttribute(a, attrs[a]); }; e.innerHTML = text || ""; return e; }
+
+var _action_email_to = function(email_address, e) {
   console.log("_action_email_to", email_address, e);
-}*/
+  var modal = nu("div", {"class": "modal"});
+  var modal_content = nu("div", {}, "Oops an error occured. Email this to the developers?<br/>");
+  var cancel = nu("a", {"href": "#"}, "Cancel");
+  var button = nu("a", {
+    "href": "mailto:" + email_address +
+    "?subject=" + encodeURIComponent("JavaScript error from " + e.url) +
+    "&body=" + encodeURIComponent("Hi, just letting you know I saw the following error:\n\n" + JSON.stringify(e, null, 2) + "\n")},
+    "Send");
+  document.body.appendChild(modal);
+  modal.appendChild(modal_content);
+  modal_content.appendChild(cancel);
+  modal_content.appendChild(button);
+  function _removemodal() {
+    document.body.removeChild(modal);
+  }
+  modal.style = "position: fixed; z-index: 1, left: 0; top: 0; width: 100%; height: 100%; overflow: none; background-color: rgba(0,0,0,0.4); margin: auto auto;";
+  modal_content.style = "margin: 1em auto; width: 200px; text-align: center; padding: 2em; background-color: white; border-radius: 3px;";
+  cancel.style = button.style = "margin: 2em 1em 0em 1em; display: inline-block;";
+  cancel.onclick = function(ev) { ev.preventDefault(); _removemodal(); };
+  button.onclick = function(ev) { setTimeout(function() {document.body.removeChild(modal);}, 1); };
+}
 
 // TODO: handler to post to Google Analytics API
 //  ga('send', 'event', 'window.onerror', message, navigator.userAgent);

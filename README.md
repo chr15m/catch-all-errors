@@ -30,6 +30,20 @@ By default the error is propagated through to default the browser resulting in `
 <script src="catch-all-errors.min.js" data-post-url="/api/errorhandler" data-prevent-default></script>
 ```
 
+### Show error email modal
+
+![Screenshot of the modal](./modal.png)
+
+Use `data-email-to` to put up a simple modal which will allow the user to email the results to a developer.
+
+```html
+<script src="catch-all-errors.min.js" data-email-to='support@yoursite.net'>
+```
+
+The way this mode works is to generate a `mailto:` link with the traceback details. When the user clicks "Send" it will open their mail program with a pre-written email to the address nominated.
+
+### Catch all errors in a callback function
+
 Use your own callback function to handle the caught errors. The `data-callback` parameter should specify the name of the callback function which is passed one parameter with the error properties.
 
 ```html
