@@ -23,8 +23,14 @@
         // trigger an error at startup
         blee();
       }
+      
+      function catcher(e) {
+        console.log("Processing a caught error:", e);
+        document.getElementById("log").innerHTML += "Caught: " + e.message + "\n";
+      }
     </script>
     <p>To trigger an error, type something into the text field and hit [Enter].</p>
-    <input type="text" id="testInput" name="testInput">
+    <p><input type="text" id="testInput" name="testInput"></p>
+    <pre id="log"></pre>
   </body>
 </html>

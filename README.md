@@ -30,6 +30,12 @@ By default the error is propagated through to default the browser resulting in `
 <script src="catch-all-errors.min.js" data-post-url="/api/errorhandler" data-prevent-default></script>
 ```
 
+Use your own callback function to handle the caught errors. The `data-callback` parameter should specify the name of the callback function which is passed one parameter with the error properties.
+
+```html
+<script src="catch-all-errors.min.js" data-callback="catcher"></script>.
+```
+
 ### Error object properties
 
 Errors will have the following properties when caught and handled:

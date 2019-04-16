@@ -7,6 +7,7 @@ var action = {};
 var config = {};
 
 action.post_url = script.getAttribute("data-post-url") || null;
+action.callback = script.getAttribute("data-callback") || null;
 //action.email_to = script.getAttribute("data-email-to") || null;
 config.continuous = script.getAttribute("data-continuous") != null;
 config.prevent_default = script.getAttribute("data-prevent-default") != null;
@@ -25,6 +26,7 @@ window.onerror = function(message, url, line, column, error) {
 
   // if user has configured API post
   action.post_url && _action_post_url(action.post_url, e);
+  action.callback && window[action.callback] && window[action.callback](e);
   //action.email_to && _action_email_to(action.email_to, e);
 
   // re-install this error handler again if continuous mode
