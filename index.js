@@ -102,7 +102,7 @@ var _action_email_to = function(email_address, e) {
   function _removemodal() {
     document.body.removeChild(modal);
   }
-  modal.style = "position: fixed; z-index: 1, left: 0; top: 0; width: 100%; height: 100%; overflow: none; background-color: rgba(0,0,0,0.4); margin: auto auto;";
+  modal.style = "position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: none; background-color: rgba(0,0,0,0.4); margin: auto auto;";
   modal_content.style = "margin: 1em auto; width: 200px; text-align: center; padding: 2em; background-color: white; border-radius: 3px;";
   cancel.style = button.style = "margin: 2em 1em 0em 1em; display: inline-block;";
   cancel.onclick = function(ev) { ev.preventDefault(); _removemodal(); };
