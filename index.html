@@ -4,6 +4,22 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <script src="catch-all-errors.min.js" data-post-url="example-api.php" data-continuous></script>
+    <style>
+      html, body {
+        margin: 0px;
+        padding: 0px;
+        font-family: Arial;
+      }
+
+      #content {
+        max-width: 600px;
+        margin: auto auto;
+      }
+
+      input {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -29,8 +45,10 @@
         document.getElementById("log").innerHTML += "Caught: " + e.message + "\n";
       }
     </script>
-    <p>To trigger an error, type something into the text field and hit [Enter].</p>
-    <p><input type="text" id="testInput" name="testInput"></p>
-    <pre id="log"></pre>
+    <div id="content">
+      <p>To trigger an error, type something into the text field and hit [Enter].</p>
+      <p><input type="text" id="testInput" name="testInput" placeholder="Error message..."></p>
+      <pre id="log"></pre>
+    </div>
   </body>
 </html>
