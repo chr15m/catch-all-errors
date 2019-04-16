@@ -27,7 +27,10 @@
         var el = document.getElementById("testInput");
 
         var barf = function() {
-          throw new Error('borked=' + el.value);
+          setTimeout(function() {
+            el.value = "";
+          }, 1);
+          throw new Error('borked with "' + el.value + '"');
         };
 
         if (el.addEventListener) {
