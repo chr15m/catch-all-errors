@@ -8,9 +8,13 @@ Enable it with a single line before other JavaScript:
 
 No more mangled, half-understood, context-free error-feelings reported. \o/
 
+```script
+npm i catch-all-errors
+```
+
 This is intended for self-hosting, small businesses, and indie-hacker scale traffic, not venture backed startup scale traffic.
 
-## API
+## API & usage
 
 Catch every error and post to a URL on your server.
 
