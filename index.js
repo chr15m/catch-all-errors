@@ -87,7 +87,7 @@ function nu(tag, attrs, text) { var e = document.createElement(tag); for(var a i
 
 var _action_email_to = function(email_address, e) {
   console.log("_action_email_to", email_address, e);
-  var modal = nu("div", {"class": "modal"});
+  var modal = nu("div", {"class": "catch-all-errors-modal"});
   var modal_content = nu("div", {}, "Oops an error occured. Email this to the developers?<br/>");
   var cancel = nu("a", {"href": "#"}, "Cancel");
   var button = nu("a", {
