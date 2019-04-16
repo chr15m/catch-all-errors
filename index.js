@@ -43,6 +43,7 @@ var _extract_error = function(message, url, line, column, error) {
   console.log("onerror", arguments);
   var e = {
     "message": message,
+    "location": document.location.href,
     "url": url,
     "line": line,
     "column": column,
